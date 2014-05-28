@@ -1,0 +1,373 @@
+html,body {
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    font-family:arial;
+    font-size:11px;
+    background:#1D2330;
+    color:#AAAAAA;
+    overflow:hidden;
+}
+
+html, body {
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    font-family:arial;
+    font-size:11px;
+    color:#AAAAAA;
+    overflow:hidden;
+}
+
+crD3Bars{
+    position:asbolute;
+    z-index:99;
+    height:400px;
+    width:400px;
+    background:red;
+}
+
+div.legend {   
+  position: absolute;    
+  padding: 5px;               
+  background: rgba(0,0,0,0.5);   
+  border: 0px;      
+  border-radius: 8px;           
+  pointer-events: none;     
+    color:lightgrey;
+}
+.graphTitle{
+    fill:lightgrey;
+    font-size:14px;
+    
+}
+.legend .bid{
+    color:red;
+}
+.legend .ask{
+    color:green;
+}
+.legend .trade{
+    color:yellow;
+}
+.overlay {
+    fill: none;
+    pointer-events: all;
+}
+.axis path, .axis line {
+    fill: none;
+    stroke: #555;
+    shape-rendering: crispEdges;
+}
+.axis text {
+    fill: #555;
+}
+.yLine, .xLine{
+    stroke: lightgrey;
+    stroke-width: .5px;
+}
+.bidLine, .askLine, .tradeLine {
+    fill: none;
+    stroke: red;
+    stroke-width: 1.5px;
+}
+.askLine {
+    stroke: green;
+}
+.tradeLine {
+    stroke: yellow;
+}
+.bidMarker, .askMarker, .tradeMarker{
+    fill:red;
+    pointer-events:none;
+    stroke:red;
+    stroke-width:0px;
+}
+.askMarker{
+    fill:green;
+}
+.tradeMarker{
+    fill:yellow;
+}
+:focus, :active{
+	outline:none;
+}
+
+
+/* The below CSS is for scrollbar styling, there is no way to do this for Firefox */		
+
+/* Scrollbar styles for Webkit Browsers (Chrome/Opera/Safari) */	
+::-webkit-scrollbar{
+  width: 18px;
+  height: 18px;
+}
+::-webkit-scrollbar-button:start:decrement,::-webkit-scrollbar-button:end:increment {
+	height: 0px;
+	width:0px;
+	display: block;
+	background-color: #1C1C2B;
+}
+::-webkit-scrollbar-track, ::-webkit-scrollbar-track-piece, ::-webkit-scrollbar-corner,	::-webkit-resizer {
+	-webkit-box-shadow: inset 0 0 6px #000;
+	background:#1C1C2B;
+}
+::-webkit-scrollbar-thumb{
+	background: #4C4C5E;
+	-webkit-box-shadow: inset 0 0 6px #353549;
+	border:1px solid #1C1C2B;
+}
+::-webkit-scrollbar-thumb:window-inactive {
+	background: #292944;
+}
+
+/* Scrollbar styles for IE */
+body{
+	scrollbar-base-color: #1C1C2B;
+	scrollbar-face-color: #4C4C5E;
+	scrollbar-3dlight-color: #1C1C2B;
+	scrollbar-highlight-color: #1C1C2B;
+	scrollbar-track-color: #1C1C2B;
+	scrollbar-arrow-color: #4C4C5E;
+	scrollbar-shadow-color: #1C1C2B;
+	scrollbar-dark-shadow-color: #000;
+}
+
+input{
+    border:1px solid #808080;
+    background:#161A24;	
+    border-radius:2px;
+    padding:2px 4px;
+    color:#AAAAAA;
+    display:inline;
+}
+ng-d3-line > svg{
+    height:100%;
+    width:100%;
+}
+#graph, ng-d3-line {
+  width: 100%;
+  height: 40%;
+  top:0;
+}
+#summary{
+    height:176px;    
+    overflow:hidden;
+    top:calc(40% + 30px);
+}
+#titles{
+    top:40%;
+    font-weight:bold;
+}
+#titles > div{
+    padding-left:5px;
+    box-sizing:border-box;
+}
+#filters, #titles{
+    height:30px;
+    line-height:30px;
+    background: rgb(32,38,48); /* Old browsers */
+    /* IE9 SVG, needs conditional override of 'filter' to 'none' */
+    background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIwJSIgeTI9IjEwMCUiPgogICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iIzIwMjYzMCIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiMxODFhMjgiIHN0b3Atb3BhY2l0eT0iMSIvPgogIDwvbGluZWFyR3JhZGllbnQ+CiAgPHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEiIGhlaWdodD0iMSIgZmlsbD0idXJsKCNncmFkLXVjZ2ctZ2VuZXJhdGVkKSIgLz4KPC9zdmc+);
+    background: -moz-linear-gradient(top,  rgba(32,38,48,1) 0%, rgba(24,26,40,1) 100%); /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(32,38,48,1)), color-stop(100%,rgba(24,26,40,1))); /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(top,  rgba(32,38,48,1) 0%,rgba(24,26,40,1) 100%); /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(top,  rgba(32,38,48,1) 0%,rgba(24,26,40,1) 100%); /* Opera 11.10+ */
+    background: -ms-linear-gradient(top,  rgba(32,38,48,1) 0%,rgba(24,26,40,1) 100%); /* IE10+ */
+    background: linear-gradient(to bottom,  rgba(32,38,48,1) 0%,rgba(24,26,40,1) 100%); /* W3C */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#202630', endColorstr='#181a28',GradientType=0 ); /* IE6-8 */
+     border-top: 1px solid #404040;
+}
+#filters{
+    top:calc(40% + 206px);
+}
+#filters > div, #titles > div{
+    float:left;
+}
+#filters  input{
+    margin:0;
+}
+#history{
+    top:calc(40% + 236px);
+    bottom:0px;
+    height:calc(60% - 236px);
+    overflow-y:auto;
+}
+#graph, ng-d3-line , #summary, #history, #filters, #titles{
+    box-sizing:border-box;
+    position: absolute; 
+    overflow:hidden;
+    width:100%;
+}
+#summary >.tableLayout  {
+    padding-right:16px;
+}
+#summary >.tableLayout, #history > .scrollLayout{
+    float:left;
+    box-sizing:border-box;
+}
+#summary >.tableLayout:first-child, #history > .scrollLayout:first-child, #filters > div:first-child, #titles > div:first-child{
+    width:65%;
+}
+#summary >.tableLayout:last-child, #history > .scrollLayout:last-child, #filters > div:last-child, #titles > div:last-child{
+    width:35%;
+    
+}
+.scrollLayout{
+    overflow-y:scroll;
+    height:100%;
+}
+.tableLayout {
+    display: table;
+    table-layout: fixed;
+    width:100%;
+    height:100%:
+}
+.rowLayout {
+    display: table-row;
+}
+.cellLayout {
+    display: table-cell;
+}
+
+.tableLayout, .rowLayout{
+    height:1%;
+    max-height:1%;
+}
+.tableHeader{
+    font-weight:bold;
+}
+.dataTable .cellLayout{
+    padding:5px;
+}
+.dataTable >.rowLayout:not(:last-of-type) .cellLayout{
+border-bottom:1px dotted #404040;
+}
+.valUp, .valDown{
+    transition:all 200ms ease-in;    
+}
+.valUp{
+        color:#5EF775;
+}
+.valDown{
+        color:#ff0000;
+}
+.valUp.animValChange{
+    animation: valUp 1s;
+    -webkit-animation: valUp 1s;
+}
+.valDown.animValChange{
+    animation: valDown 1s;
+    -webkit-animation: valDown 1s;
+}
+ 
+@keyframes valDown
+{
+    from {background-color: #8F3939;}
+    to {background-color: transparent;}
+} 
+@-webkit-keyframes valDown
+{
+    from {background-color: #8F3939;}
+    to {background-color: transparent;}
+} 
+@keyframes valUp
+{
+    from {background-color: #428F39;}
+    to {background-color: transparent;}
+} 
+@-webkit-keyframes valUp
+{
+    from {background-color: #428F39;}
+    to {background-color: transparent;}
+} 
+
+.valUp span, .valDown span{
+    display:inline-block;
+}
+.valUp sub, .valDown sub{
+    bottom:0;
+    font-size:.8em;
+    vertical-align:bottom;
+    margin-left:10px;
+    opacity:.6;
+        transition:all 200ms ease-in;   
+}
+@media (max-width:1400px){
+    .valUp sub, .valDown sub{
+        opacity:0;
+        height:0;
+        width:0;
+        overflow:hidden;
+    }
+}
+@media (max-width:1300px){
+    .valUp sub, .valDown sub{
+        display:none;
+    }
+}
+
+.valUp span:before, .valDown span:before{
+    font-family:FontAwesome;
+    margin-right:5px;
+}
+.valUp span:before{
+    color:#3CB371;
+    content:'\f0d8';
+}
+.valDown span:before{
+    color:#FF0412;
+    content:'\f0d7';
+}
+.graphCurrency{
+    position:relative;
+    cursor:pointer;
+}
+.graphCurrency:hover:after{
+    content:'(chart)';
+    margin-left:10px;
+    font-size:.9em;
+    position:relative;
+    display:inline-block;
+    
+}
+#summary > .dataTable .rowLayout:not(.tableHeader) .tradeSell,
+#summary > .dataTable .rowLayout:not(.tableHeader) .tradeBuy{
+    position:relative;
+    z-index:0;    
+    cursor:pointer;
+}
+#summary > .dataTable .rowLayout:not(.tableHeader) .tradeSell:before,
+#summary > .dataTable .rowLayout:not(.tableHeader) .tradeBuy:before{
+    z-index:1;
+    content:'';
+    overflow:hidden;
+    top:0;
+    left:0;
+    position:absolute;
+    width:100%;
+    box-sizing:border-box;
+    max-width:0;
+    height:100%;
+    background:rgba(255,255,255,0.4);
+    color:white;
+    opacity:0;
+    text-align:right;
+    transition:max-width 100ms ease-in;
+    font-weight:bold;
+}
+#summary > .dataTable .rowLayout:not(.tableHeader) .tradeSell:before{
+    content:'SELL';
+}
+#summary > .dataTable .rowLayout:not(.tableHeader) .tradeBuy:before{
+    content:'BUY';
+}
+#summary > .dataTable .rowLayout:not(.tableHeader) .tradeSell:hover:before,
+#summary > .dataTable .rowLayout:not(.tableHeader) .tradeBuy:hover:before{
+    max-width:100%;
+    opacity:1;    
+    color:black;
+    padding:5px 5px 0 0;    
+}
+
