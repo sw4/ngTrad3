@@ -20,7 +20,7 @@ Allow UI segment resizing
 
 Better bid/ask trade placement
 
-Fix times to 2 seconds (add padding)
+Fix times to 2 seconds (zero-space padding)
 
 Optimize & clean code, implement best practice
 
