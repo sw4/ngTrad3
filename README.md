@@ -29,4 +29,7 @@ Optimize & clean code, implement best practice
 Improve memory management
 
 Improve browser compatibility (IE)
+
+Add bid/ask size bars overlain on respective lines - scaled on y2 axis
+
 ```
