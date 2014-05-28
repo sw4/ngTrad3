@@ -1,0 +1,171 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<title>ngTrad3</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+		<meta charset="utf-8">
+		<!-- Fontawesome  -->
+		<link href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+		<!-- Page CSS  -->
+		<link href="styles.css" rel="stylesheet">
+		<script src="http://d3js.org/d3.v3.js"></script>
+	</head>
+	<body data-ng-app="ngApp"  data-ng-controller="dataController">
+		<ng-d3-line data='graphData'></ng-d3-line>
+		<div id='titles'>
+			<div>
+				Quote Summary
+			</div>
+			<div>
+				Trade Summary
+			</div>
+		</div>
+		<div id='summary'>
+			<div class='tableLayout dataTable'>
+				<div class='rowLayout tableHeader'>
+					<div class='cellLayout'>
+						Currency Pair
+					</div>
+					<div class='cellLayout'>
+						Ask Price
+					</div>
+					<div class='cellLayout'>
+						Ask Size
+					</div>
+					<div class='cellLayout'>
+						Bid Price
+					</div>
+					<div class='cellLayout'>
+						Bid Size
+					</div>
+					<div class='cellLayout'>
+						Last Update
+					</div>
+					<div class='cellLayout'>
+						Time
+					</div>
+				</div>
+				<div class='rowLayout' data-ng-repeat="quote in quoteSummary track by $index">
+					<div class='cellLayout graphCurrency' data-ng-click="graph(quote.currencyPair)">
+						{{quote.currencyPair}} 
+					</div>
+					<div class='cellLayout animValChange tradeSell' data-ng-click="trade('BUY', $event, quote.currencyPair)" data-ng-class="quote.askPrice && quote.prevAskPrice && (quote.askPrice > quote.prevAskPrice && 'valUp' || 'valDown')">
+						<span data-ng-if="quote.askPrice">{{quote.askPrice}}</span><sub data-ng-if="quote.prevAskPrice">({{quote.askPrice > quote.prevAskPrice && '+' || ''}}{{quote.askPrice-quote.prevAskPrice | number:0}}, {{quote.askPrice > quote.prevAskPrice && '+' || '-'}}{{(100*quote.askPrice/quote.prevAskPrice) | number:0}}%)</sub>
+					</div>
+					<div class='cellLayout animValChange tradeSell' data-ng-click="trade('BUY', $event, quote.currencyPair)" data-ng-class="quote.askSize && quote.prevAskSize && (quote.askSize > quote.prevAskSize && 'valUp' || 'valDown')">
+						<span data-ng-if="quote.askSize">{{quote.askSize}}</span><sub data-ng-if="quote.prevAskSize">({{quote.askSize > quote.prevAskSize && '+' || ''}}{{quote.askSize-quote.prevAskSize | number:0}}, {{quote.askSize > quote.prevAskSize && '+' || '-'}}{{(100*quote.askSize/quote.prevAskSize) | number:0}}%)</sub>
+					</div>
+					<div class='cellLayout animValChange tradeBuy' data-ng-click="trade('SELL', $event, quote.currencyPair)" data-ng-class="quote.bidPrice && quote.prevBidPrice && (quote.bidPrice > quote.prevBidPrice && 'valUp' || 'valDown')">
+						<span data-ng-if="quote.bidPrice">{{quote.bidPrice}}</span><sub data-ng-if="quote.prevBidPrice">({{quote.bidPrice > quote.prevBidPrice && '+' || ''}}{{quote.bidPrice-quote.prevBidPrice | number:0}}, {{quote.bidPrice > quote.prevBidPrice && '+' || '-'}}{{(100*quote.bidPrice/quote.prevBidPrice) | number:0}}%)</sub>
+					</div>
+					<div class='cellLayout animValChange tradeBuy' data-ng-click="trade('SELL', $event, quote.currencyPair)" data-ng-class="quote.bidSize && quote.prevBidSize && (quote.bidSize > quote.prevBidSize && 'valUp' || 'valDown')">
+						<span data-ng-if="quote.bidSize">{{quote.bidSize}}</span><sub data-ng-if="quote.prevBidSize">({{quote.bidSize > quote.prevBidSize && '+' || ''}}{{quote.bidSize-quote.prevBidSize | number:0}}, {{quote.bidSize > quote.prevBidSize && '+' || '-'}}{{(100*quote.bidSize/quote.prevBidSize) | number:0}}%)</sub>
+					</div>
+					<div class='cellLayout'>
+						{{quote.type}}
+					</div>
+					<div class='cellLayout'>
+						{{quote.time}}
+					</div>
+				</div>
+			</div>
+			<div class='tableLayout dataTable'>
+				<div class='rowLayout tableHeader'>
+					<div class='cellLayout'>
+						Currency Pair 
+					</div>
+					<div class='cellLayout'>
+						Trade Price
+					</div>
+					<div class='cellLayout'>
+						Side
+					</div>
+					<div class='cellLayout'>
+						Time
+					</div>
+				</div>
+				<div class='rowLayout' data-ng-repeat="trade in tradeSummary">
+					<div class='cellLayout graphCurrency'  data-ng-click="graph(trade.currencyPair)">
+						{{trade.currencyPair}}
+					</div>
+					<div class='cellLayout animValChange' data-ng-class="trade.tradePrice && trade.prevTradePrice && (trade.tradePrice > trade.prevTradePrice && 'valUp' || 'valDown')">
+						<span data-ng-if="trade.tradePrice">{{trade.tradePrice}}</span><sub data-ng-if="trade.prevTradePrice">({{trade.tradePrice > trade.prevTradePrice && '+' || ''}}{{trade.tradePrice-trade.prevTradePrice | number:0}}, {{trade.tradePrice > trade.prevTradePrice && '+' || '-'}}{{(100*trade.tradePrice/trade.prevTradePrice) | number:0}}%)</sub>
+					</div>
+					<div class='cellLayout'>
+						{{trade.side}}
+					</div>
+					<div class='cellLayout'>
+						{{trade.time}}
+					</div>
+				</div>
+			</div>
+		</div>
+		<div id='filters'>
+			<div>
+				<input type="text" placeholder="Filter quote history.." data-ng-model="filterQuotes" />
+			</div>
+			<div>
+				<input type="text" placeholder="Filter trade history.." data-ng-model="filterTrades" />
+			</div>
+		</div>
+		<div id='history'>
+			<div class='scrollLayout'>
+				<div class='tableLayout dataTable'>
+					<div class='rowLayout' data-ng-repeat="quote in quoteList  | filter:filterQuotes">
+						<div class='cellLayout graphCurrency'  data-ng-click="graph(quote.currencyPair)">
+							{{quote.currencyPair}}
+						</div>
+						<div class='cellLayout' data-ng-class="quote.askPrice && quote.prevAskPrice && quote.askPrice > quote.prevAskPrice && 'valUp' || 'valDown'">
+							<span data-ng-if="quote.type=='ASK'">{{quote.askPrice}}</span>
+						</div>
+						<div class='cellLayout' data-ng-class="quote.askSize && quote.prevAskSize && quote.askSize > quote.prevAskSize && 'valUp' || 'valDown'">
+							<span data-ng-if="quote.type=='ASK'">{{quote.askSize}}</span>
+						</div>
+						<div class='cellLayout' data-ng-class="quote.bidPrice && quote.prevBidPrice && quote.bidPrice > quote.prevBidPrice && 'valUp' || 'valDown'">
+							<span data-ng-if="quote.type=='BID'">{{quote.bidPrice}}</span>
+						</div>
+						<div class='cellLayout' data-ng-class="quote.bidSize && quote.prevBidSize && quote.bidSize > quote.prevBidSize && 'valUp' || 'valDown'">
+							<span data-ng-if="quote.type=='BID'">{{quote.bidSize}}</span>
+						</div>
+						<div class='cellLayout'>
+							{{quote.type}}
+						</div>
+						<div class='cellLayout'>
+							{{quote.time}}
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class='scrollLayout'>
+				<div class='tableLayout dataTable'>
+					<div class='rowLayout' data-ng-repeat="trade in tradeList  | filter:filterTrades">
+						<div class='cellLayout graphCurrency'  data-ng-click="graph(trade.currencyPair)">
+							{{trade.currencyPair}}
+						</div>
+						<div class='cellLayout' data-ng-class="trade.tradePrice > trade.prevTradePrice && 'valUp' || 'valDown'">
+							<span data-ng-if="trade.tradePrice">{{trade.tradePrice}}</span>
+						</div>
+						<div class='cellLayout'>
+							{{trade.side}}
+						</div>
+						<div class='cellLayout'>
+							{{trade.time}}
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<script></script>
+		<!-- jQuery -->
+		<script src="http://code.jquery.com/jquery-2.1.0.min.js"></script>
+		<!-- HTML5 Element Support -->
+		<!--[if lt IE 9]>
+		<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+		<script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+		<![endif]--> 
+		<!-- Angular.js -->
+		<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.15/angular.min.js"></script>
+		<!-- Page  -->  
+		<script src="script.js"></script> 
+	</body>
+</html>
