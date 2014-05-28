@@ -49,17 +49,17 @@
 					<div class='cellLayout graphCurrency' data-ng-click="graph(quote.currencyPair)">
 						{{quote.currencyPair}} 
 					</div>
-					<div class='cellLayout animValChange tradeSell' data-ng-click="trade('BUY', $event, quote.currencyPair)" data-ng-class="quote.askPrice && quote.prevAskPrice && (quote.askPrice > quote.prevAskPrice && 'valUp' || 'valDown')">
-						<span data-ng-if="quote.askPrice">{{quote.askPrice}}</span><sub data-ng-if="quote.prevAskPrice">({{quote.askPrice > quote.prevAskPrice && '+' || ''}}{{quote.askPrice-quote.prevAskPrice | number:0}}, {{quote.askPrice > quote.prevAskPrice && '+' || '-'}}{{(100*quote.askPrice/quote.prevAskPrice) | number:0}}%)</sub>
+					<div class='cellLayout animValChange' data-ng-click="trade('BUY', $event, quote.currencyPair)" data-ng-class="quote.askPrice && quote.prevAskPrice && (quote.askPrice > quote.prevAskPrice && 'valUp' || 'valDown')">
+						<div class='tradeSell'><span data-ng-if="quote.askPrice">{{quote.askPrice}}</span><sub data-ng-if="quote.prevAskPrice">({{quote.askPrice > quote.prevAskPrice && '+' || ''}}{{quote.askPrice-quote.prevAskPrice | number:0}}, {{quote.askPrice > quote.prevAskPrice && '+' || '-'}}{{(100*quote.askPrice/quote.prevAskPrice) | number:0}}%)</sub></div>
 					</div>
-					<div class='cellLayout animValChange tradeSell' data-ng-click="trade('BUY', $event, quote.currencyPair)" data-ng-class="quote.askSize && quote.prevAskSize && (quote.askSize > quote.prevAskSize && 'valUp' || 'valDown')">
-						<span data-ng-if="quote.askSize">{{quote.askSize}}</span><sub data-ng-if="quote.prevAskSize">({{quote.askSize > quote.prevAskSize && '+' || ''}}{{quote.askSize-quote.prevAskSize | number:0}}, {{quote.askSize > quote.prevAskSize && '+' || '-'}}{{(100*quote.askSize/quote.prevAskSize) | number:0}}%)</sub>
+					<div class='cellLayout animValChange' data-ng-click="trade('BUY', $event, quote.currencyPair)" data-ng-class="quote.askSize && quote.prevAskSize && (quote.askSize > quote.prevAskSize && 'valUp' || 'valDown')">
+						<div class='tradeSell'><span data-ng-if="quote.askSize">{{quote.askSize}}</span><sub data-ng-if="quote.prevAskSize">({{quote.askSize > quote.prevAskSize && '+' || ''}}{{quote.askSize-quote.prevAskSize | number:0}}, {{quote.askSize > quote.prevAskSize && '+' || '-'}}{{(100*quote.askSize/quote.prevAskSize) | number:0}}%)</sub></div>
 					</div>
-					<div class='cellLayout animValChange tradeBuy' data-ng-click="trade('SELL', $event, quote.currencyPair)" data-ng-class="quote.bidPrice && quote.prevBidPrice && (quote.bidPrice > quote.prevBidPrice && 'valUp' || 'valDown')">
-						<span data-ng-if="quote.bidPrice">{{quote.bidPrice}}</span><sub data-ng-if="quote.prevBidPrice">({{quote.bidPrice > quote.prevBidPrice && '+' || ''}}{{quote.bidPrice-quote.prevBidPrice | number:0}}, {{quote.bidPrice > quote.prevBidPrice && '+' || '-'}}{{(100*quote.bidPrice/quote.prevBidPrice) | number:0}}%)</sub>
+					<div class='cellLayout animValChange' data-ng-click="trade('SELL', $event, quote.currencyPair)" data-ng-class="quote.bidPrice && quote.prevBidPrice && (quote.bidPrice > quote.prevBidPrice && 'valUp' || 'valDown')">
+						<div class='tradeBuy'><span data-ng-if="quote.bidPrice">{{quote.bidPrice}}</span><sub data-ng-if="quote.prevBidPrice">({{quote.bidPrice > quote.prevBidPrice && '+' || ''}}{{quote.bidPrice-quote.prevBidPrice | number:0}}, {{quote.bidPrice > quote.prevBidPrice && '+' || '-'}}{{(100*quote.bidPrice/quote.prevBidPrice) | number:0}}%)</sub></div>
 					</div>
-					<div class='cellLayout animValChange tradeBuy' data-ng-click="trade('SELL', $event, quote.currencyPair)" data-ng-class="quote.bidSize && quote.prevBidSize && (quote.bidSize > quote.prevBidSize && 'valUp' || 'valDown')">
-						<span data-ng-if="quote.bidSize">{{quote.bidSize}}</span><sub data-ng-if="quote.prevBidSize">({{quote.bidSize > quote.prevBidSize && '+' || ''}}{{quote.bidSize-quote.prevBidSize | number:0}}, {{quote.bidSize > quote.prevBidSize && '+' || '-'}}{{(100*quote.bidSize/quote.prevBidSize) | number:0}}%)</sub>
+					<div class='cellLayout animValChange' data-ng-click="trade('SELL', $event, quote.currencyPair)" data-ng-class="quote.bidSize && quote.prevBidSize && (quote.bidSize > quote.prevBidSize && 'valUp' || 'valDown')">
+						<div class='tradeBuy'><span data-ng-if="quote.bidSize">{{quote.bidSize}}</span><sub data-ng-if="quote.prevBidSize">({{quote.bidSize > quote.prevBidSize && '+' || ''}}{{quote.bidSize-quote.prevBidSize | number:0}}, {{quote.bidSize > quote.prevBidSize && '+' || '-'}}{{(100*quote.bidSize/quote.prevBidSize) | number:0}}%)</sub></div>
 					</div>
 					<div class='cellLayout'>
 						{{quote.type}}
