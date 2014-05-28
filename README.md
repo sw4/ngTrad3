@@ -18,6 +18,8 @@ Provide currency pair selection option directly on graph
 
 Allow UI segment resizing
 
+Improve 'on-hover' graph behaviour (marker visibility)
+
 Better bid/ask trade placement
 
 Fix times to 2 seconds (zero-space padding)
