@@ -12,7 +12,7 @@ todo:
 ---
 
 ```
-Implemement `transition` and `delay` for d3 on Angular scope update to enable smooth scrolling of incoming data
+Implemement d3 transition() and delay() on Angular scope update to enable smooth scrolling of incoming data
 
 Provide currency pair selection option directly on graph
 
@@ -20,9 +20,9 @@ Allow UI segment resizing
 
 Better bid/ask trade placement
 
-Optimize code, clean code, implement best practices
+Optimize & clean code, implement best practice
 
 Improve memory management
 
-Improve browser compatibility
+Improve browser compatibility (IE)
 ```
