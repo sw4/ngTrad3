@@ -3,7 +3,7 @@ ngTrad3
 
 **Licensed under [cc by-sa 3.0](http://creativecommons.org/licenses/by-sa/3.0/) with attribution required**
 
-Basic demo trading front-end built with Angular and d3
+Basic trading front-end built with Angular and d3
 
 Live demo can be viewed here: http://sw4.github.io/ngTrad3/
 
